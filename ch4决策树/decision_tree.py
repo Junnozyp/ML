@@ -195,14 +195,14 @@ class my_DecisionTreeClassifier:
 
         return self._tree
 
-    def predict(self, x_test, index=self.index):
+    def predict(self, x_test, index):
         data_length = len(x_test)
         result = []
         for i in range(data_length):
             result.append(self._tree.predict(x_test[i], index))
         return result
 
-    def score(self, x_test, y_test, index=self.index):
+    def score(self, x_test, y_test, index):
         result = self.predict(x_test, index)
         result = np.array(result).reshape(-1, )
         y_test_rs = np.reshape(y_test, (-1,))
@@ -240,6 +240,6 @@ if __name__ == "__main__":
     y_test = np.array(test_data.iloc[:, 0]).reshape(len(x_test), 1)
     print(DTree.fit(x_train, y_train, list(train_data.columns[1:])))
 
-    score, result = DTree.score(x_test, y_test)
+    score, result = DTree.score(x_test, y_test, DTree.index)
     print(result)
     print(score)
